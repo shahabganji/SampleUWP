@@ -1,0 +1,18 @@
+﻿<ResourceDictionary
+    x:Class="WiredBrainCoffee.CustomersApp.Resources.DataTemplates.CustomerListItemDataTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:model="using:WiredBrainCoffee.CustomersApp.Model"
+    mc:Ignorable="d">
+    <DataTemplate x:Key="CustomerListItemDataTemplate" x:DataType="model:Customer">
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Text="{x:Bind FirstName, Mode = OneWay}" x:Phase="0" />
+            <TextBlock Text="{x:Bind LastName, Mode = OneWay}" x:Phase="1"
+                       Margin="5 0 0 0" />
+            <TextBlock Opacity=".5" Margin="5 0 0 0" Text="(Developer)"
+                       Visibility="{x:Bind IsDeveloper, Mode = OneWay}" />
+        </StackPanel>
+    </DataTemplate>
+</ResourceDictionary>

@@ -1,0 +1,65 @@
+﻿<Page
+    x:Class="StatePatternSample.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:StatePatternSample.Models"
+    xmlns:converter="using:StatePatternSample.ValueConverters"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <converter:TransitionConverter x:Key="TransitionConverter" />
+    </Page.Resources>
+
+    <Grid>
+
+        <Grid.Resources>
+            <Style TargetType="Button">
+                <Setter Property="Width" Value="100" />
+            </Style>
+        </Grid.Resources>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0">
+            <Button Click="{x:Bind ViewModel.NewOrder}"
+                    IsEnabled="{x:Bind ViewModel.Status, Mode=OneWay, 
+                                    Converter ={StaticResource TransitionConverter},
+                                    ConverterParameter='New'}"
+                    Content="New" />
+            <Button Click="{x:Bind ViewModel.Pay}"
+                    IsEnabled="{x:Bind ViewModel.Status, Mode=OneWay, 
+                                    Converter ={StaticResource TransitionConverter},
+                                    ConverterParameter='Paid'}"
+                    Content="Pay" />
+            <Button Click="{x:Bind ViewModel.Ship}"
+                    IsEnabled="{x:Bind ViewModel.Status, Mode=OneWay, 
+                                    Converter ={StaticResource TransitionConverter},
+                                    ConverterParameter='Shipped'}"
+                    Content="Ship" />
+            <Button Click="{x:Bind ViewModel.CancelOrder}"
+                    IsEnabled="{x:Bind ViewModel.Status, Mode=OneWay,
+                                    Converter ={StaticResource TransitionConverter},
+                                    ConverterParameter='Cancelled'}"
+                    Content="Cancel" />
+            <Button Click="{x:Bind ViewModel.Revise}"
+                    IsEnabled="{x:Bind ViewModel.Status, Mode=OneWay, 
+                                    Converter ={StaticResource TransitionConverter},
+                                    ConverterParameter='New'}"
+                    Content="Revise" />
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="1" Orientation="Horizontal">
+            <TextBlock Margin="30 0 0 0" Text="{x:Bind ViewModel.OrderId, Mode = OneWay}" />
+            <TextBlock Text=" : " />
+            <TextBlock Margin="30 0 0 0" Text="{x:Bind ViewModel.Status.Name, Mode = OneWay}" />
+        </StackPanel>
+
+    </Grid>
+</Page>

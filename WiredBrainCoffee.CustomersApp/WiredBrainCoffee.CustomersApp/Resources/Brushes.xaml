@@ -1,0 +1,22 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ResourceDictionary.ThemeDictionaries>
+
+        <ResourceDictionary x:Key="Dark">
+            <SolidColorBrush x:Key="CustomerListBackgroundBrush">#222222</SolidColorBrush>
+        </ResourceDictionary>
+
+        <ResourceDictionary x:Key="Light">
+            <SolidColorBrush x:Key="CustomerListBackgroundBrush">#EEEEEE</SolidColorBrush>
+        </ResourceDictionary>
+
+
+    </ResourceDictionary.ThemeDictionaries>
+
+    <SolidColorBrush x:Key="HeaderBackgroundBrush">#F05A28</SolidColorBrush>
+    <SolidColorBrush x:Key="HeaderForegroundBrush" >#333333</SolidColorBrush>
+    
+
+</ResourceDictionary>

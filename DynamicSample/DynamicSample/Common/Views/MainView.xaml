@@ -1,0 +1,31 @@
+﻿<ResourceDictionary
+    x:Class="DynamicSample.Common.MainView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:dts="using:DynamicSample.Common"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:DynamicSample.Common.ViewModels"
+    mc:Ignorable="d">
+    <DataTemplate x:Key="MainView" x:DataType="vm:MainViewModel">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <ListView ItemsSource="{Binding ViewModels, Mode=OneWay}"
+                          SelectedItem="{Binding SelectedViewModel, Mode=TwoWay}"
+                          DisplayMemberPath="Name" />
+            </StackPanel>
+
+            <Grid Grid.Column="1" Background="Red">
+                <ContentControl
+                    Content="{Binding SelectedViewModel}"
+                    ContentTemplateSelector="{StaticResource TemplateSelector}" />
+            </Grid>
+
+        </Grid>
+    </DataTemplate>
+</ResourceDictionary>
