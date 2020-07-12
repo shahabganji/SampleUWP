@@ -117,7 +117,7 @@ namespace App1.ViewModels
             using var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             var content = await response.Content.ReadAsStringAsync();
-
+            
             try
             {
                 var allPrograms = JsonConvert.DeserializeObject<List<ProgramGroup>>(content);
