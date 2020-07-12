@@ -44,6 +44,12 @@
         </Storyboard>
     </Page.Resources>
 
+    <Page.TopAppBar>
+        <CommandBar>
+            <AppBarButton Icon="Play" Click="{x:Bind ViewModel.LoadAntenPrograms}"/>
+        </CommandBar>
+    </Page.TopAppBar>
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*" />
