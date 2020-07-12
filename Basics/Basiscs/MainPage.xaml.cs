@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Windows.ApplicationModel.Core;
 using Windows.Devices.WiFiDirect;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -28,13 +29,13 @@ namespace App1
         {
             this.InitializeComponent();
             this.ViewModel = new AppViewModel();
-            
+
+            this.Loaded += async (_, __) => await ViewModel.LoadAntenPrograms();
         }
 
         // private void Button_Click(object sender, RoutedEventArgs e)
         // {
         //     ColorPulse.Begin();
         // }
-
     }
 }
