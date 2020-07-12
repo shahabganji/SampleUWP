@@ -1,0 +1,166 @@
+﻿<Page
+    x:Class="App1.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:App1"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:vm="using:App1.ViewModels"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Page.Resources>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <Style TargetType="Image">
+            <Setter Property="Margin" Value="5" />
+        </Style>
+
+        <Storyboard x:Name="ColorPulse">
+            <ColorAnimationUsingKeyFrames Storyboard.TargetName="RFill"
+                                          Storyboard.TargetProperty="Color"
+                                          Duration="0:0:8" RepeatBehavior="Forever" AutoReverse="False">
+                <DiscreteColorKeyFrame KeyTime="0:0:0" Value="Red" />
+                <LinearColorKeyFrame KeyTime="0:0:2" Value="White" />
+                <DiscreteColorKeyFrame KeyTime="0:0:4" Value="Blue" />
+                <EasingColorKeyFrame KeyTime="0:0:6" Value="DarkGreen">
+                    <EasingColorKeyFrame.EasingFunction>
+                        <PowerEase EasingMode="EaseIn" />
+                    </EasingColorKeyFrame.EasingFunction>
+                </EasingColorKeyFrame>
+
+            </ColorAnimationUsingKeyFrames>
+
+            <!-- <DoubleAnimation Storyboard.TargetName="R" -->
+            <!--                  Storyboard.TargetProperty="(Rectangle.RenderTransform).(ScaleTransform.ScaleX)" -->
+            <!--                  To="0.5" AutoReverse="True" -->
+            <!--                  Duration="0:0:2" -->
+            <!--                  BeginTime="0:0:1" -->
+            <!--                  RepeatBehavior="Forever" /> -->
+
+        </Storyboard>
+    </Page.Resources>
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="1">
+            <TextBlock Text="{x:Bind ViewModel.Message, Mode=OneWay}" FontSize="50" />
+            <StackPanel Orientation="Horizontal">
+                <Button Click="{x:Bind ViewModel.LoadMessageAsync}" Content="Load Help" />
+                <Button Click="{x:Bind ViewModel.PickProfileAsync}" Content="Pick Profile Image" />
+                <Button Click="{x:Bind ViewModel.ShowImagesInAFolder}" Content="Show Folder Images" />
+                <Button Click="{x:Bind ViewModel.CancelShowImagesInAFolder}" Content="Cancel Folder Images" />
+            </StackPanel>
+            <Image Source="{x:Bind ViewModel.ProfileImage, Mode=OneWay}" Width="200" Height="200" />
+
+            <ListView ItemsSource="{x:Bind ViewModel.Images, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="BitmapImage">
+                        <StackPanel>
+                            <Image Source="{x:Bind Mode=OneWay}" Width="100" Height="100" />
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </StackPanel>
+
+        <StackPanel Grid.Column="0">
+            <CommandBar>
+                <AppBarButton Icon="Refresh" Click="{x:Bind ViewModel.LoadAntenPrograms}" />
+            </CommandBar>
+            <ListView ItemsSource="{x:Bind ViewModel.Programs, Mode=OneWay}">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:Program">
+                        <StackPanel Orientation="Horizontal" FlowDirection="RightToLeft"
+                                    Background="Black"
+                                    >
+                            <TextBlock Foreground="Azure" Text="{x:Bind title}" FlowDirection="RightToLeft" HorizontalAlignment="Right" />
+                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                                <Ellipse Height="30" Width="30">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{x:Bind layoutData.guestLogo}" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <Ellipse Height="30" Width="30">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="{x:Bind layoutData.hostLogo}" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
+                                <!--<Image Source="" Width="50" Height="50" />
+                                <Image Source="{x:Bind layoutData.hostLogo}" Width="50" Height="50"/>-->
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackPanel>
+
+    </Grid>
+
+
+    <!--<Grid>
+        --><!--<Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+
+        <TextBlock TextWrapping="Wrap" VerticalAlignment="Top" FontSize="20" Text="hi" x:Uid="Text1" />
+
+        <Image Grid.Column="1">
+            <Image.Source>
+                <BitmapImage UriSource="https://s.gravatar.com/avatar/f823fa05c6bdb6873af34160200f52dc?s=80"
+                             DecodePixelHeight="80" DecodePixelWidth="80" />
+            </Image.Source>
+        </Image>-->
+
+    <!-- <Grid.Triggers> -->
+    <!--     <EventTrigger> -->
+    <!--         <BeginStoryboard> -->
+    <!--             <Storyboard x:Name="ColorPulse"> -->
+    <!--                 <ColorAnimationUsingKeyFrames Storyboard.TargetName="RFill" -->
+    <!--                                 Storyboard.TargetProperty="Color" -->
+    <!--                                 Duration="0:0:8" RepeatBehavior="Forever" AutoReverse="False"> -->
+    <!--                     <DiscreteColorKeyFrame KeyTime="0:0:0" Value="Red" /> -->
+    <!--                     <LinearColorKeyFrame KeyTime="0:0:2" Value="White"/> -->
+    <!--                     <DiscreteColorKeyFrame KeyTime="0:0:4" Value="Blue"/> -->
+    <!--                     <EasingColorKeyFrame KeyTime="0:0:6" Value="DarkGreen"> -->
+    <!--                         <EasingColorKeyFrame.EasingFunction> -->
+    <!--                             <PowerEase EasingMode="EaseIn" /> -->
+    <!--                         </EasingColorKeyFrame.EasingFunction> -->
+    <!--                     </EasingColorKeyFrame> -->
+    <!-- -->
+    <!--                 </ColorAnimationUsingKeyFrames> -->
+    <!-- -->
+    <!--                 ~1~ <DoubleAnimation Storyboard.TargetName="R" @1@ -->
+    <!--                 ~1~                  Storyboard.TargetProperty="(Rectangle.RenderTransform).(ScaleTransform.ScaleX)" @1@ -->
+    <!--                 ~1~                  To="0.5" AutoReverse="True" @1@ -->
+    <!--                 ~1~                  Duration="0:0:2" @1@ -->
+    <!--                 ~1~                  BeginTime="0:0:1" @1@ -->
+    <!--                 ~1~                  RepeatBehavior="Forever" /> @1@ -->
+    <!-- -->
+    <!--             </Storyboard> -->
+    <!--         </BeginStoryboard> -->
+    <!--     </EventTrigger> -->
+    <!-- </Grid.Triggers> -->
+
+
+    <!--<Rectangle x:Name="R">
+            <Rectangle.Fill>
+                <SolidColorBrush Color="Red" x:Name="RFill" />
+            </Rectangle.Fill>
+            <Rectangle.RenderTransform>
+                <ScaleTransform ScaleX="1" ScaleY="1" />
+            </Rectangle.RenderTransform>
+        </Rectangle>
+
+        <Button Content="Animate!" FontSize="50" Click="Button_Click"></Button>--><!--
+
+    </Grid>-->
+</Page>
